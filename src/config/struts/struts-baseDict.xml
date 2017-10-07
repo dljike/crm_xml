@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE struts PUBLIC
+	"-//Apache Software Foundation//DTD Struts Configuration 2.3//EN"
+	"http://struts.apache.org/dtds/struts-2.3.dtd">
+
+<struts>
+
+    <constant name="struts.devMode" value="true" />
+    
+	<!-- struts ajax请求 返回json -->
+	<package name="baseDict" namespace="/baseDict" extends="json-default">
+		<action name="findBaseDict" class="baseDictAction" method="findBaseDict">
+		 	<result type="json">
+		 		<param name="root">baseDicts</param>
+		 	</result>
+		</action>
+	
+	</package>
+
+</struts>

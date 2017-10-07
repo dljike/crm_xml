@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE hibernate-mapping PUBLIC 
+    "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+    "http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
+<hibernate-mapping>
+	<class name="cn.itcast.domain.Customer" table="cst_customer">
+		<id name="cust_id">
+			<generator class="native"></generator>
+		</id>
+		<property name="cust_name"></property>
+		<property name="cust_phone"></property>
+		<property name="cust_address"></property>
+		<property name="cust_image"></property>
+		<property name="cust_filename"></property>
+		
+		<many-to-one name="baseDictSource" class="cn.itcast.domain.BaseDict" column="cust_source"></many-to-one>
+		<many-to-one name="baseDictLevel" class="cn.itcast.domain.BaseDict" column="cust_level"></many-to-one>
+		<many-to-one name="baseDictIndustry" class="cn.itcast.domain.BaseDict" column="cust_industry"></many-to-one>
+		<!-- 放弃维护权，设置级联 -->
+		<set name="linkMans" inverse="true" cascade="delete">
+			<key column="lkm_cust_id"></key>
+			<one-to-many class="cn.itcast.domain.LinkMan"/>
+		</set>
+	</class>
+</hibernate-mapping>

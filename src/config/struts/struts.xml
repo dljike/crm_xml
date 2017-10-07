@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE struts PUBLIC
+	"-//Apache Software Foundation//DTD Struts Configuration 2.3//EN"
+	"http://struts.apache.org/dtds/struts-2.3.dtd">
+
+<struts>
+
+    <constant name="struts.devMode" value="true" />
+	
+	 <!--限定一个表单里所有文件加起来的总大小不能超过20M -->
+    <constant name="struts.multipart.maxSize" value="20971520"></constant>
+	<!-- 指定自定义资源文件,显示错误信息 -->
+	<constant name="struts.custom.i18n.resources" value="messageResource"></constant>
+	
+	<include file="config/struts/struts-user.xml"></include>
+	<include file="config/struts/struts-baseDict.xml"></include>
+	<include file="config/struts/struts-customer.xml"></include>
+	<include file="config/struts/struts-linkMan.xml"></include>
+
+</struts>

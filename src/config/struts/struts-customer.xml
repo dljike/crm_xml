@@ -1,0 +1,57 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE struts PUBLIC
+	"-//Apache Software Foundation//DTD Struts Configuration 2.3//EN"
+	"http://struts.apache.org/dtds/struts-2.3.dtd">
+
+<struts>
+
+    <constant name="struts.devMode" value="true" />
+
+	<package name="customer" namespace="/customer" extends="json-default">
+		<action name="save" class="customerAction" method="save">
+			<interceptor-ref name="defaultStack">
+				<!-- 限定每个文件大小不能超过10M 单位字节 -->
+				<param name="fileUpload.maximumSize">10485760</param>
+				<!-- 限定允许上传的文件类型：jpg，png -->
+				<param name="fileUpload.allowedExtensions">.jpg,.png</param>
+			</interceptor-ref>
+		 	<result type="redirectAction">customerList</result>
+		 	<!-- 一旦文件不符合要求，就默认找imput结果集，回到原始页面 -->
+		 	<result name="input">/jsp/customer/add.jsp</result>
+		</action>
+		
+		<action name="customerList" class="customerAction" method="getCustomerList">
+		 	<result>/jsp/customer/list.jsp</result>
+		</action>
+		
+		
+		<action name="deleteCustomer" class="customerAction" method="deleteCustomer">
+			<result name="success" type="redirectAction">customerList</result>
+		</action>
+		
+		<action name="findCustomerById" class="customerAction" method="findCustomerById">
+			<result name="success">/jsp/customer/edit.jsp</result>
+		</action>
+		
+		<action name="updateCustomer" class="customerAction" method="updateCustomer">
+			<interceptor-ref name="defaultStack">
+				<!-- 限定每个文件大小不能超过10M 单位字节 -->
+				<param name="fileUpload.maximumSize">10485760</param>
+				<!-- 限定允许上传的文件类型：jpg，png -->
+				<param name="fileUpload.allowedExtensions">.jpg,.png</param>
+			</interceptor-ref>
+		 	<result type="redirectAction">customerList</result>
+		 	<!-- 一旦文件不符合要求，就默认找imput结果集，回到原始页面 -->
+		 	<result name="input">/jsp/customer/edit.jsp</result>
+		</action>
+		
+		
+		<action name="findCustomerList" class="customerAction" method="findCustomerList" >
+			<result type="json">
+    			<param name="root">customers</param>
+    		</result>
+		</action>
+		
+	</package>
+
+</struts>
